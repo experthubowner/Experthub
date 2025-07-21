@@ -4,7 +4,7 @@ local PlaceId = game.PlaceId
 print("🧠 Detectando juego... PlaceId:", PlaceId)
 
 local GameScripts = {
-    [111958650] = "ArsenalSilent.lua" -- Arsenal
+    [286090429] = "ArsenalSilent.lua" -- Arsenal CORRECTO
 }
 
 local URLBase = "https://raw.githubusercontent.com/experthubowner/Experthub/main/scripts/"
