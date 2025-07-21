@@ -1,4 +1,5 @@
 local PlaceId = game.PlaceId
+
 local GameScripts = {
     [111958650] = "ArsenalSilent.lua"
 }
