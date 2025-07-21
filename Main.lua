@@ -3,6 +3,7 @@ print("🧠 PlaceId detectado:", PlaceId)
 
 local GameScripts = {
     [111958650] = "ArsenalSilent.lua"
+    [537413528] = "BuildABoat.lua" -- PlaceId del juego original
 }
 
 local URLBase = "https://raw.githubusercontent.com/experthubowner/Experthub/main/scripts/"
