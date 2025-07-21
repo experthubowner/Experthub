@@ -4,7 +4,7 @@ local GameScripts = {
     [111958650] = "ArsenalSilent.lua"
 }
 
-local URLBase = "https://raw.githubusercontent.com/experthubowner/Experthub/main/scripts/"
+local URLBase = "https://raw.githubusercontent.com/experthubowner/Experthub/main/guiones/"
 
 if GameScripts[PlaceId] then
     loadstring(game:HttpGet(URLBase .. GameScripts[PlaceId]))()
