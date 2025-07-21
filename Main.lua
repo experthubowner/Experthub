@@ -2,7 +2,7 @@ local PlaceId = game.PlaceId
 print("🧠 PlaceId detectado:", PlaceId)
 
 local GameScripts = {
-    [111958650] = "ArsenalSilent.lua"
+    [111958650] = "ArsenalSilent.lua",
     [537413528] = "BuildABoat.lua" -- PlaceId del juego original
 }
 
