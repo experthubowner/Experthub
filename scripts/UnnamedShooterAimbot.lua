@@ -1,62 +1,39 @@
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
-local Teams = game:GetService("Teams")
+-- ⚡ Cyber Message "Aimbot Activated - Press Jump" SOLO si puedes activar el aimbot
+local function showAimbotActivated()
+	if true then -- puedes reemplazar esta condición por una real si necesitas
+		local screenGui = Instance.new("ScreenGui")
+		screenGui.Name = "AimbotMessage"
+		screenGui.IgnoreGuiInset = true
+		screenGui.ResetOnSpawn = false
+		screenGui.Parent = player:WaitForChild("PlayerGui")
 
-local localPlayer = Players.LocalPlayer
-local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
-local camera = workspace.CurrentCamera
+		local label = Instance.new("TextLabel")
+		label.Parent = screenGui
+		label.Size = UDim2.new(1, 0, 0.2, 0)
+		label.Position = UDim2.new(0, 0, 0.4, 0)
+		label.BackgroundTransparency = 1
+		label.TextColor3 = Color3.fromRGB(255, 0, 255)
+		label.TextStrokeTransparency = 0
+		label.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+		label.Text = "⚡⚡ AIMBOT ACTIVATED ⚡⚡\nPress Jump to Toggle"
+		label.Font = Enum.Font.Arcade
+		label.TextScaled = true
 
-local aimbotEnabled = false
-local connection
+		-- Efecto de luz animado cyber
+		local tween = TweenService:Create(label, TweenInfo.new(0.3, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1, true), {
+			TextColor3 = Color3.fromRGB(255, 0, 255)
+		})
+		tween:Play()
 
--- Encuentra el jugador enemigo más cercano
-local function getClosestPlayer()
-    local closestPlayer = nil
-    local shortestDistance = math.huge
-
-    for _, player in pairs(Players:GetPlayers()) do
-        -- Verifica que no sea el jugador local y que estén en equipos diferentes
-        if player ~= localPlayer and player.Team ~= localPlayer.Team then
-            if player.Character and player.Character:FindFirstChild("Head") then
-                local distance = (player.Character.Head.Position - camera.CFrame.Position).Magnitude
-                if distance < shortestDistance then
-                    shortestDistance = distance
-                    closestPlayer = player
-                end
-            end
-        end
-    end
-
-    return closestPlayer
+		-- Auto-remover después de 3 segundos
+		task.delay(3, function()
+			if screenGui then
+				screenGui:Destroy()
+			end
+		end)
+	end
 end
 
--- Aimbot: apunta la cámara hacia el enemigo
-local function startAimbot()
-    connection = RunService.RenderStepped:Connect(function()
-        local target = getClosestPlayer()
-        if target and target.Character and target.Character:FindFirstChild("Head") then
-            camera.CFrame = CFrame.new(camera.CFrame.Position, target.Character.Head.Position)
-        end
-    end)
-end
-
--- Detener aimbot
-local function stopAimbot()
-    if connection then
-        connection:Disconnect()
-        connection = nil
-    end
-end
-
--- Manejo del salto
-UserInputService.JumpRequest:Connect(function()
-    aimbotEnabled = not aimbotEnabled
-    if aimbotEnabled then
-        startAimbot()
-        print("Aimbot activado")
-    else
-        stopAimbot()
-        print("Aimbot desactivado")
-    end
-end)
+-- 🔫 LLAMAR CUANDO PUEDAS ACTIVAR AIMBOT
+-- Puedes cambiar esta lógica a lo que quieras (ej. si estás en una zona, un nivel, etc.)
+showAimbotActivated()
