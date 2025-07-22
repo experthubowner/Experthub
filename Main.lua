@@ -1,11 +1,15 @@
--- 🌐 ExpertHub Main Loader by LUA GOD 😈
+-- 🌐 ExpertHub Main Loader v2 by LUA GOD 😈
 
 local PlaceId = game.PlaceId
 print("🧠 Detectando juego... PlaceId:", PlaceId)
 
 local GameScripts = {
-    [286090429] = "ArsenalSilent.lua", -- Arsenal
-    [987654321] = "UnnamedShooterAimbot.lua" -- Unnamed Shooter 🆕
+    [286090429] = "ArsenalSilent.lua",              -- Arsenal
+    [14202073004] = "UnnamedShooterAimbot.lua",     -- ✅ Unnamed Shooter real
+    [4282985734] = "CombatWarriors.lua",            -- Combat Warriors
+    [9872472334] = "EvadeESP.lua",                  -- Evade
+    [292439477] = "PhantomForcesAim.lua",           -- Phantom Forces
+    [6516141723] = "DoorsESP.lua"                   -- Doors
 }
 
 local URLBase = "https://raw.githubusercontent.com/experthubowner/Experthub/main/scripts/"
@@ -15,9 +19,11 @@ if GameScripts[PlaceId] then
     loadstring(game:HttpGet(URLBase .. GameScripts[PlaceId]))()
 else
     print("❌ Juego no soportado (ID: " .. PlaceId .. ")")
-    game.StarterGui:SetCore("SendNotification", {
-        Title = "Expert Hub 🌐",
-        Text = "Juego no soportado aún 😢",
-        Duration = 5
-    })
+    pcall(function()
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "ExpertHub 🌐",
+            Text = "Juego no soportado aún 😢",
+            Duration = 5
+        })
+    end)
 end
