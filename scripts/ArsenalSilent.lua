@@ -1,22 +1,34 @@
--- 🎯 Arsenal Aimbot AUTO con FOV CÍRCULO (NO necesitas disparar)
+-- 🎯 Arsenal Aimbot AUTO con FOV CÍRCULO + INTRO CYBER ANIMADA
 -- By DIOS DEL LUA 😈👑
 
--- ✅ Mostrar imagen por 3 segundos antes de activar el aimbot
+-- 🔮 INTRO CYBER ANIMADA
+local TweenService = game:GetService("TweenService")
 local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
 
--- GUI para mostrar imagen por 3 segundos
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "ExpertHubGUI"
-ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+-- 🧪 Crear GUI
+local ScreenGui = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
+ScreenGui.Name = "CyberIntro"
+ScreenGui.ResetOnSpawn = false
 
-local ImageLabel = Instance.new("ImageLabel")
-ImageLabel.Parent = ScreenGui
-ImageLabel.BackgroundTransparency = 1
-ImageLabel.Size = UDim2.new(0, 300, 0, 300)
-ImageLabel.Position = UDim2.new(0.5, -150, 0.5, -150)
-ImageLabel.Image = "rbxassetid://17326235589" -- 💥 Imagen subida por ChatGPT
+local TextLabel = Instance.new("TextLabel", ScreenGui)
+TextLabel.Size = UDim2.new(0, 0, 0, 0)
+TextLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
+TextLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel.BackgroundTransparency = 1
+TextLabel.Text = "⚡ AIMBOT ACTIVADO ⚡"
+TextLabel.TextColor3 = Color3.fromRGB(200, 0, 255)
+TextLabel.TextStrokeTransparency = 0
+TextLabel.TextStrokeColor3 = Color3.new(0, 0, 0)
+TextLabel.Font = Enum.Font.Arcade
+TextLabel.TextScaled = true
+
+-- 🎬 Zoom animado cyber
+local tweenInfo = TweenInfo.new(0.6, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+local targetSize = { Size = UDim2.new(0.8, 0, 0.2, 0) }
+TweenService:Create(TextLabel, tweenInfo, targetSize):Play()
 
 wait(3)
 ScreenGui:Destroy()
@@ -27,12 +39,9 @@ getgenv().Prediction = 0.135
 getgenv().FOVRadius = 100
 getgenv().TargetPart = "Head"
 
--- 📦 Servicios
-local RunService = game:GetService("RunService")
-
--- 🔘 Dibujo del FOV Circle
+-- 🟣 Dibujar Círculo FOV
 local FOVCircle = Drawing.new("Circle")
-FOVCircle.Color = Color3.fromRGB(0, 255, 0)
+FOVCircle.Color = Color3.fromRGB(200, 0, 255) -- Morado cyber
 FOVCircle.Thickness = 2
 FOVCircle.Filled = false
 FOVCircle.Radius = getgenv().FOVRadius
@@ -40,10 +49,10 @@ FOVCircle.Transparency = 0.5
 FOVCircle.Visible = true
 FOVCircle.Position = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
 
--- 🎯 Función para encontrar el enemigo más cercano al círculo
+-- 🎯 Buscar enemigo más cercano
 local function getClosestEnemy()
     local closest, shortest = nil, math.huge
-    for _,player in pairs(Players:GetPlayers()) do
+    for _, player in pairs(Players:GetPlayers()) do
         if player ~= LocalPlayer and player.Team ~= LocalPlayer.Team and player.Character and player.Character:FindFirstChild(getgenv().TargetPart) then
             local part = player.Character[getgenv().TargetPart]
             local screenPos, onScreen = Camera:WorldToViewportPoint(part.Position)
@@ -59,7 +68,7 @@ local function getClosestEnemy()
     return closest
 end
 
--- 🎥 RenderStepped loop del aimbot
+-- 💥 Loop del Aimbot
 RunService.RenderStepped:Connect(function()
     FOVCircle.Position = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
     if getgenv().AimbotEnabled then
@@ -72,5 +81,4 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
--- ✅ Aimbot activado
-print("✅ Aimbot con FOV Circle ACTIVADO en Arsenal 😈💚")
+print("✅ AIMBOT con intro cyber activado 😈💜")
